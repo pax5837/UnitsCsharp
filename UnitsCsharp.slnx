@@ -1,0 +1,9 @@
+﻿<Solution>
+  <Folder Name="/_SolutionItems/">
+    <File Path=".gitignore" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Units.Examples.ConsoleApp\Units.Examples.ConsoleApp.csproj" Type="Classic C#" />
+  <Project Path="Units.Tests\Units.Tests.csproj" Type="Classic C#" />
+  <Project Path="Units\Units.csproj" Type="Classic C#" />
+</Solution>
