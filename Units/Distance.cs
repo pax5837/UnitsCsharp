@@ -27,7 +27,7 @@ public readonly struct Distance : IBaseValue<Distance>
     {
         return new Distance(value, true);
     }
-    
+
     internal static Distance FromMilliMeters(decimal value)
     {
         return new Distance(value / 1000m, true);
@@ -35,8 +35,7 @@ public readonly struct Distance : IBaseValue<Distance>
 
     public override string ToString()
     {
-        var metersString = Meters.ToString("F2");
-        return $"{metersString} [m]";
+        return $"{Meters:F2} [m]";
     }
 
     public static Distance operator +(Distance a, Distance b) => FromMeters(a.Meters + b.Meters);
@@ -45,7 +44,7 @@ public readonly struct Distance : IBaseValue<Distance>
     public static Distance operator /(Distance a, decimal b) => FromMeters(a.Meters / b);
     public static Distance operator *(Distance a, decimal b) => FromMeters(a.Meters * b);
     public static Distance operator *(decimal a, Distance b) => FromMeters(a * b.Meters);
-    
+
     public static bool operator <(Distance a, Distance b) => a.Meters < b.Meters;
     public static bool operator >(Distance a, Distance b) => a.Meters > b.Meters;
     public static bool operator <=(Distance a, Distance b) => a.Meters <= b.Meters;
@@ -53,9 +52,9 @@ public readonly struct Distance : IBaseValue<Distance>
 
     public static Speed operator /(Distance d, Time t) => Speed.FromMetersPerSecond(d.Meters / t.Seconds);
     public static Time operator /(Distance d, Speed s) => Time.FromSeconds(d.Meters / s.MetersPerSecond);
-    
+
     public static decimal operator /(Distance d1, Distance d2) => d1.Meters / d2.Meters;
-   
+
     [Obsolete("Should only be used for combinations", error: true)]
     public decimal GetBaseValue()
     {
