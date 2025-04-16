@@ -51,62 +51,22 @@ public readonly struct Distance : IBaseValue<Distance>
         Meters = meters;
     }
 
-    public static Distance FromMeters(decimal value)
-    {
-        return new Distance(value, false);
-    }
+    public static Distance FromMeters(decimal value) => new Distance(value, false);
+    public static Distance FromMillimeters(decimal value) => new Distance(value * MillimetersFactor, false);
+    public static Distance FromCentimeters(decimal value) => new Distance(value * CentimetersFactor, false);
+    public static Distance FromDecimeters(decimal value) => new Distance(value * DecimetersFactor, false);
+    public static Distance FromKilometers(decimal value) => new Distance(value * KilometersFactor, false);
+    public static Distance FromFeet(decimal value) => new Distance(value * FeetFactor, false);
+    public static Distance FromInches(decimal value) => new Distance(value * InchesFactor, false);
+    public static Distance FromMiles(decimal value) => new Distance(value * MilesFactor, false);
 
-    public static Distance FromMillimeters(decimal value)
-    {
-        return new Distance(value * MillimetersFactor, false);
-    }
-
-    public static Distance FromCentimeters(decimal value)
-    {
-        return new Distance(value * CentimetersFactor, false);
-    }
-
-    public static Distance FromDecimeters(decimal value)
-    {
-        return new Distance(value * DecimetersFactor, false);
-    }
-
-    public static Distance FromKilometers(decimal value)
-    {
-        return new Distance(value * KilometersFactor, false);
-    }
-
-    public static Distance FromFeet(decimal value)
-    {
-        return new Distance(value * FeetFactor, false);
-    }
-
-    public static Distance FromInches(decimal value)
-    {
-        return new Distance(value * InchesFactor, false);
-    }
-
-    public static Distance FromMiles(decimal value)
-    {
-        return new Distance(value * MilesFactor, false);
-    }
-
-    public override string ToString()
-    {
-        return $"{Meters:F2} [m]";
-    }
+    public override string ToString() => $"{Meters:F3} [m]";
 
     [Obsolete("Should only be used for combinations", error: true)]
-    public decimal GetBaseValue()
-    {
-        return Meters;
-    }
+    public decimal GetBaseValue() => Meters;
 
     [Obsolete("Should only be used for combinations", error: true)]
-    public Distance FromBaseValue(decimal value)
-    {
-        return FromMeters(value);
-    }
+    public Distance FromBaseValue(decimal value) => FromMeters(value);
 
     public static Distance operator +(Distance a, Distance b) => FromMeters(a.Meters + b.Meters);
     public static Distance operator -(Distance a, Distance b) => FromMeters(a.Meters - b.Meters);

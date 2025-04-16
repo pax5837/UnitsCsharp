@@ -69,7 +69,7 @@ var temperature = new ValueDefinition(
 
 IImmutableList<ValueDefinition> values =
 [
-    power,
+    distance,
 ];
 
 var lines = values.SelectMany(x => ucg.GenerateCode(x).Append(string.Empty)).ToImmutableList();

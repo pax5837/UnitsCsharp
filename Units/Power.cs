@@ -50,22 +50,13 @@ public readonly struct Power : IBaseValue<Power>
     public static Power FromHorsepowerMetric(decimal value) => new Power(value * HorsepowerMetricFactor, false);
     public static Power FromHorsepowerImperial(decimal value) => new Power(value * HorsepowerImperialFactor, false);
 
-    public override string ToString()
-    {
-        return $"{Watts:F2} [W]";
-    }
+    public override string ToString() => $"{Watts:F3} [W]";
 
     [Obsolete("Should only be used for combinations", error: true)]
-    public decimal GetBaseValue()
-    {
-        return Watts;
-    }
+    public decimal GetBaseValue() => Watts;
 
     [Obsolete("Should only be used for combinations", error: true)]
-    public Power FromBaseValue(decimal value)
-    {
-        return FromWatts(value);
-    }
+    public Power FromBaseValue(decimal value) => FromWatts(value);
 
     public static Power operator +(Power a, Power b) => FromWatts(a.Watts + b.Watts);
     public static Power operator -(Power a, Power b) => FromWatts(a.Watts - b.Watts);

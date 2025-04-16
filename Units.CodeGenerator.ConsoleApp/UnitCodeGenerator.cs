@@ -167,16 +167,10 @@ internal class UnitCodeGenerator
 
         return new Lines(_indent)
             .Add(1, "[Obsolete(\"Should only be used for combinations\", error: true)]")
-            .Add(1, "public decimal GetBaseValue()")
-            .Add(1, "{")
-            .Add(2, $"return {defaultUnit.PropertyName()};")
-            .Add(1, "}")
+            .Add(1, $"public decimal GetBaseValue() => {defaultUnit.PropertyName()};")
             .AddEmptyLine()
             .Add(1, "[Obsolete(\"Should only be used for combinations\", error: true)]")
-            .Add(1, $"public {className} FromBaseValue(decimal value)")
-            .Add(1, "{")
-            .Add(2, $"return From{defaultUnit.PropertyName()}(value);")
-            .Add(1, "}")
+            .Add(1, $"public {className} FromBaseValue(decimal value) => From{defaultUnit.PropertyName()}(value);")
             .AddEmptyLine()
             .ToIImmutableList();
     }
@@ -184,10 +178,7 @@ internal class UnitCodeGenerator
     private IImmutableList<string> GenerateStringFormatting(UnitDefinition defaultUnit)
     {
         return new Lines(_indent)
-            .Add(1, "public override string ToString()")
-            .Add(1, "{")
-            .Add(2, $"return $\"{{{defaultUnit.PropertyName()}:F2}} [{defaultUnit.UnitShortSymbol}]\";")
-            .Add(1, "}")
+            .Add(1, $"public override string ToString() => $\"{{{defaultUnit.PropertyName()}:F3}} [{defaultUnit.UnitShortSymbol}]\";")
             .AddEmptyLine()
             .ToIImmutableList();
     }
