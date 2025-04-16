@@ -1,0 +1,53 @@
+namespace Units;
+
+public static class PowerExtensions
+{
+    public static Power Watts(this decimal value) => Power.FromWatts(value);
+    public static Power Watts(this float value) => Power.FromWatts((decimal)value);
+    public static Power Watts(this int value) => Power.FromWatts(value);
+    public static Power Watts(this uint value) => Power.FromWatts(value);
+    public static Power Watts(this long value) => Power.FromWatts(value);
+    public static Power Watts(this ulong value) => Power.FromWatts(value);
+    public static Power Watts(this short value) => Power.FromWatts(value);
+    public static Power Watts(this ushort value) => Power.FromWatts(value);
+    public static Power Milliwatts(this decimal value) => Power.FromMilliwatts(value);
+    public static Power Milliwatts(this float value) => Power.FromMilliwatts((decimal)value);
+    public static Power Milliwatts(this int value) => Power.FromMilliwatts(value);
+    public static Power Milliwatts(this uint value) => Power.FromMilliwatts(value);
+    public static Power Milliwatts(this long value) => Power.FromMilliwatts(value);
+    public static Power Milliwatts(this ulong value) => Power.FromMilliwatts(value);
+    public static Power Milliwatts(this short value) => Power.FromMilliwatts(value);
+    public static Power Milliwatts(this ushort value) => Power.FromMilliwatts(value);
+    public static Power Kilowatts(this decimal value) => Power.FromKilowatts(value);
+    public static Power Kilowatts(this float value) => Power.FromKilowatts((decimal)value);
+    public static Power Kilowatts(this int value) => Power.FromKilowatts(value);
+    public static Power Kilowatts(this uint value) => Power.FromKilowatts(value);
+    public static Power Kilowatts(this long value) => Power.FromKilowatts(value);
+    public static Power Kilowatts(this ulong value) => Power.FromKilowatts(value);
+    public static Power Kilowatts(this short value) => Power.FromKilowatts(value);
+    public static Power Kilowatts(this ushort value) => Power.FromKilowatts(value);
+    public static Power Megawatts(this decimal value) => Power.FromMegawatts(value);
+    public static Power Megawatts(this float value) => Power.FromMegawatts((decimal)value);
+    public static Power Megawatts(this int value) => Power.FromMegawatts(value);
+    public static Power Megawatts(this uint value) => Power.FromMegawatts(value);
+    public static Power Megawatts(this long value) => Power.FromMegawatts(value);
+    public static Power Megawatts(this ulong value) => Power.FromMegawatts(value);
+    public static Power Megawatts(this short value) => Power.FromMegawatts(value);
+    public static Power Megawatts(this ushort value) => Power.FromMegawatts(value);
+    public static Power HorsepowerMetric(this decimal value) => Power.FromHorsepowerMetric(value);
+    public static Power HorsepowerMetric(this float value) => Power.FromHorsepowerMetric((decimal)value);
+    public static Power HorsepowerMetric(this int value) => Power.FromHorsepowerMetric(value);
+    public static Power HorsepowerMetric(this uint value) => Power.FromHorsepowerMetric(value);
+    public static Power HorsepowerMetric(this long value) => Power.FromHorsepowerMetric(value);
+    public static Power HorsepowerMetric(this ulong value) => Power.FromHorsepowerMetric(value);
+    public static Power HorsepowerMetric(this short value) => Power.FromHorsepowerMetric(value);
+    public static Power HorsepowerMetric(this ushort value) => Power.FromHorsepowerMetric(value);
+    public static Power HorsepowerImperial(this decimal value) => Power.FromHorsepowerImperial(value);
+    public static Power HorsepowerImperial(this float value) => Power.FromHorsepowerImperial((decimal)value);
+    public static Power HorsepowerImperial(this int value) => Power.FromHorsepowerImperial(value);
+    public static Power HorsepowerImperial(this uint value) => Power.FromHorsepowerImperial(value);
+    public static Power HorsepowerImperial(this long value) => Power.FromHorsepowerImperial(value);
+    public static Power HorsepowerImperial(this ulong value) => Power.FromHorsepowerImperial(value);
+    public static Power HorsepowerImperial(this short value) => Power.FromHorsepowerImperial(value);
+    public static Power HorsepowerImperial(this ushort value) => Power.FromHorsepowerImperial(value);
+}

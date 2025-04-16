@@ -2,33 +2,68 @@
 
 public static class DistanceExtensions
 {
-    public static Distance Meters(this float value)
-    {
-        return Distance.FromMeters((decimal)value);
-    }
-    
-    public static Distance Meters(this decimal value)
-    {
-        return Distance.FromMeters(value);
-    }
-    
-    public static Distance Meters(this int value)
-    {
-        return Distance.FromMeters(value);
-    }
-    
-    public static Distance MilliMeters(this float value)
-    {
-        return Distance.FromMilliMeters((decimal)value);
-    }
-    
-    public static Distance MilliMeters(this decimal value)
-    {
-        return Distance.FromMilliMeters(value);
-    }
-    
-    public static Distance MilliMeters(this int value)
-    {
-        return Distance.FromMilliMeters(value);
-    }
+    public static Distance Meters(this decimal value) => Distance.FromMeters(value);
+    public static Distance Meters(this float value) => Distance.FromMeters((decimal)value);
+    public static Distance Meters(this int value) => Distance.FromMeters(value);
+    public static Distance Meters(this uint value) => Distance.FromMeters(value);
+    public static Distance Meters(this long value) => Distance.FromMeters(value);
+    public static Distance Meters(this ulong value) => Distance.FromMeters(value);
+    public static Distance Meters(this short value) => Distance.FromMeters(value);
+    public static Distance Meters(this ushort value) => Distance.FromMeters(value);
+    public static Distance Millimeters(this decimal value) => Distance.FromMillimeters(value);
+    public static Distance Millimeters(this float value) => Distance.FromMillimeters((decimal)value);
+    public static Distance Millimeters(this int value) => Distance.FromMillimeters(value);
+    public static Distance Millimeters(this uint value) => Distance.FromMillimeters(value);
+    public static Distance Millimeters(this long value) => Distance.FromMillimeters(value);
+    public static Distance Millimeters(this ulong value) => Distance.FromMillimeters(value);
+    public static Distance Millimeters(this short value) => Distance.FromMillimeters(value);
+    public static Distance Millimeters(this ushort value) => Distance.FromMillimeters(value);
+    public static Distance Centimeters(this decimal value) => Distance.FromCentimeters(value);
+    public static Distance Centimeters(this float value) => Distance.FromCentimeters((decimal)value);
+    public static Distance Centimeters(this int value) => Distance.FromCentimeters(value);
+    public static Distance Centimeters(this uint value) => Distance.FromCentimeters(value);
+    public static Distance Centimeters(this long value) => Distance.FromCentimeters(value);
+    public static Distance Centimeters(this ulong value) => Distance.FromCentimeters(value);
+    public static Distance Centimeters(this short value) => Distance.FromCentimeters(value);
+    public static Distance Centimeters(this ushort value) => Distance.FromCentimeters(value);
+    public static Distance Decimeters(this decimal value) => Distance.FromDecimeters(value);
+    public static Distance Decimeters(this float value) => Distance.FromDecimeters((decimal)value);
+    public static Distance Decimeters(this int value) => Distance.FromDecimeters(value);
+    public static Distance Decimeters(this uint value) => Distance.FromDecimeters(value);
+    public static Distance Decimeters(this long value) => Distance.FromDecimeters(value);
+    public static Distance Decimeters(this ulong value) => Distance.FromDecimeters(value);
+    public static Distance Decimeters(this short value) => Distance.FromDecimeters(value);
+    public static Distance Decimeters(this ushort value) => Distance.FromDecimeters(value);
+    public static Distance Kilometers(this decimal value) => Distance.FromKilometers(value);
+    public static Distance Kilometers(this float value) => Distance.FromKilometers((decimal)value);
+    public static Distance Kilometers(this int value) => Distance.FromKilometers(value);
+    public static Distance Kilometers(this uint value) => Distance.FromKilometers(value);
+    public static Distance Kilometers(this long value) => Distance.FromKilometers(value);
+    public static Distance Kilometers(this ulong value) => Distance.FromKilometers(value);
+    public static Distance Kilometers(this short value) => Distance.FromKilometers(value);
+    public static Distance Kilometers(this ushort value) => Distance.FromKilometers(value);
+    public static Distance Feet(this decimal value) => Distance.FromFeet(value);
+    public static Distance Feet(this float value) => Distance.FromFeet((decimal)value);
+    public static Distance Feet(this int value) => Distance.FromFeet(value);
+    public static Distance Feet(this uint value) => Distance.FromFeet(value);
+    public static Distance Feet(this long value) => Distance.FromFeet(value);
+    public static Distance Feet(this ulong value) => Distance.FromFeet(value);
+    public static Distance Feet(this short value) => Distance.FromFeet(value);
+    public static Distance Feet(this ushort value) => Distance.FromFeet(value);
+    public static Distance Inches(this decimal value) => Distance.FromInches(value);
+    public static Distance Inches(this float value) => Distance.FromInches((decimal)value);
+    public static Distance Inches(this int value) => Distance.FromInches(value);
+    public static Distance Inches(this uint value) => Distance.FromInches(value);
+    public static Distance Inches(this long value) => Distance.FromInches(value);
+    public static Distance Inches(this ulong value) => Distance.FromInches(value);
+    public static Distance Inches(this short value) => Distance.FromInches(value);
+    public static Distance Inches(this ushort value) => Distance.FromInches(value);
+    public static Distance Miles(this decimal value) => Distance.FromMiles(value);
+    public static Distance Miles(this float value) => Distance.FromMiles((decimal)value);
+    public static Distance Miles(this int value) => Distance.FromMiles(value);
+    public static Distance Miles(this uint value) => Distance.FromMiles(value);
+    public static Distance Miles(this long value) => Distance.FromMiles(value);
+    public static Distance Miles(this ulong value) => Distance.FromMiles(value);
+    public static Distance Miles(this short value) => Distance.FromMiles(value);
+    public static Distance Miles(this ushort value) => Distance.FromMiles(value);
 }

@@ -14,12 +14,12 @@ public class DistanceTests
     {
         // Arrange & Act
         var distance = ((decimal)inputMeters).Meters();
-        
+
         // Assert
-        distance.MilliMeters.ShouldBeCloseTo((decimal)expectedMilliMeters, maxDeltaMilliMeters);
+        distance.Millimeters.ShouldBeCloseTo((decimal)expectedMilliMeters, maxDeltaMilliMeters);
         distance.Meters.ShouldBeCloseTo((decimal)inputMeters, maxDeltaMeters);
     }
-    
+
     [TestCase(0, 0)]
     [TestCase(963f, 0.963f)]
     [TestCase(-4724f, -4.724f)]
@@ -28,12 +28,12 @@ public class DistanceTests
         float expected)
     {
         // Arrange & Act
-        var distance = input.MilliMeters();
-        
+        var distance = input.Millimeters();
+
         // Assert
         distance.Meters.ShouldBeCloseTo((decimal)expected, maxDeltaMeters);
     }
-    
+
     [TestCase(0, 0, 0)]
     [TestCase(1.2f, 0.284f, 1.484f)]
     [TestCase(1.2f, -1.845f, -0.645f)]
@@ -46,14 +46,14 @@ public class DistanceTests
         // Arrange
         var distance1 = input1.Meters();
         var distance2 = input2.Meters();
-        
+
         // Act
         var result = distance1 + distance2;
-        
+
         // Assert
         result.Meters.ShouldBeCloseTo((decimal)expected, maxDeltaMeters);
     }
-    
+
     [TestCase(0, 0, 0)]
     [TestCase(47.3f, 17.3f, 30f)]
     [TestCase(-2f, 2.24f, -4.24f)]
@@ -66,10 +66,10 @@ public class DistanceTests
         // Arrange
         var distance1 = input1.Meters();
         var distance2 = input2.Meters();
-        
+
         // Act
         var result = distance1 - distance2;
-        
+
         // Assert
         result.Meters.ShouldBeCloseTo((decimal)expected, maxDeltaMeters);
     }
