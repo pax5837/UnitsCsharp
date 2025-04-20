@@ -30,25 +30,11 @@ public readonly struct Temperature
         DegreesC = degreesC;
     }
 
-    public static Temperature FromDegreesC(decimal value)
-    {
-        return new Temperature(value, false);
-    }
+    public static Temperature FromDegreesC(decimal value) => new Temperature(value, false);
+    public static Temperature FromKelvin(decimal value) => new Temperature(value - KelvinOffset, false);
+    public static Temperature FromDegFahrenheit(decimal value) => new Temperature((value * DegFahrenheitFactor) - DegFahrenheitOffset, false);
 
-    public static Temperature FromKelvin(decimal value)
-    {
-        return new Temperature(value - KelvinOffset, false);
-    }
-
-    public static Temperature FromDegFahrenheit(decimal value)
-    {
-        return new Temperature((value * DegFahrenheitFactor) - DegFahrenheitOffset, false);
-    }
-
-    public override string ToString()
-    {
-        return $"{DegreesC:F2} [°C]";
-    }
+    public override string ToString() => $"{DegreesC:F3} [°C]";
 
     public static bool operator <(Temperature a, Temperature b) => a.DegreesC < b.DegreesC;
     public static bool operator <=(Temperature a, Temperature b) => a.DegreesC <= b.DegreesC;

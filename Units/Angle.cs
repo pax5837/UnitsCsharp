@@ -40,20 +40,6 @@ public struct Angle : IBaseValue<Angle>
         var valueRadians = (value / 180m * (decimal)Math.PI);
         return FromRadians(valueRadians);
     }
-    public decimal Sin()
-    {
-        return (decimal)Math.Sin((double)Radians);
-    }
-
-    public decimal Cos()
-    {
-        return (decimal)Math.Cos((double)Radians);
-    }
-
-    public decimal Tan()
-    {
-        return (decimal)Math.Tan((double)Radians);
-    }
 
     public static Angle From(decimal y, decimal x)
     {

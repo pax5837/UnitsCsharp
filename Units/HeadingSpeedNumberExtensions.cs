@@ -1,6 +1,6 @@
 ﻿namespace Units
 {
-    public static class HeadingSpeedExtensions
+    public static class HeadingSpeedNumberExtensions
     {
         public static HeadingSpeed DegreesPerSecond(this decimal degreesPerSecond)
         {

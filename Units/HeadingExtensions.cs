@@ -1,58 +1,19 @@
-﻿namespace Units;
+namespace Units;
 
-public static class HeadingExtensions
+internal static class HeadingExtensions
 {
-    public static Heading Degrees(this float value)
+    public static decimal Sin(this Heading heading)
     {
-        return Heading.FromDegrees((decimal)value);
+        return (decimal)Math.Sin((double)heading.Radians);
     }
 
-    public static Heading Degrees(this decimal value)
+    public static decimal Cos(this Heading heading)
     {
-        return Heading.FromDegrees(value);
+        return (decimal)Math.Cos((double)heading.Radians);
     }
 
-    public static Heading Degrees(this double value)
+    public static decimal Tan(this Heading heading)
     {
-        return Heading.FromDegrees((decimal)value);
-    }
-
-    public static Heading Degrees(this int value)
-    {
-        return Heading.FromDegrees(value);
-    }
-
-    public static Heading Radians(this float value)
-    {
-        return Heading.FromRadians((decimal)value);
-    }
-
-    public static Heading Radians(this double value)
-    {
-        return Heading.FromRadians((decimal)value);
-    }
-
-    public static Heading Radians(this decimal value)
-    {
-        return Heading.FromRadians(value);
-    }
-
-    public static Heading Radians(this int value)
-    {
-        return Heading.FromRadians(value);
-    }
-
-    public static Angle ToAngle(this Heading heading)
-    {
-        return Angle.FromRadians(heading.Radians);
-    }
-
-    public static Heading CalculateAverage(this IEnumerable<Heading> headings)
-    {
-        var localHeadings = headings.ToArray();
-        var sumVectorX = localHeadings.Sum(heading => heading.Cos());
-        var sumVectorY = localHeadings.Sum(heading => heading.Sin());
-        var heading = (decimal)Math.Atan2(y: (double)sumVectorY, x: (double)sumVectorX);
-        return Heading.FromRadians(heading);
+        return (decimal)Math.Tan((double)heading.Radians);
     }
 }

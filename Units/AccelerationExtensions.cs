@@ -17,7 +17,6 @@ public static class AccelerationExtensions
         return Acceleration.FromMetersPerSecondSquared(value);
     }
 
-
     public static Acceleration MilliMetersPerSecondSquared(this float value)
     {
         return Acceleration.FromMilliMetersPerSecondSquared((decimal)value);

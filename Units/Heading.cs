@@ -43,14 +43,14 @@ public readonly struct Heading
         {
             return FromRadians((Radians + other.Radians) / 2m);
         }
-        
+
         var differenceHeading = Radians - other.Radians;
 
         return ((double)Math.Abs(differenceHeading)) < Math.PI
             ? FromRadians(other.Radians + (differenceHeading / 2))
             : FromRadians((decimal)((decimal)Math.PI + other.Radians + differenceHeading / 2));
     }
-    
+
     public static Heading Average(Heading a, Heading b)
     {
         return a.AverageWith(b);
@@ -60,49 +60,25 @@ public readonly struct Heading
     {
         return new Heading(ReduceRadians_To_MinusPiToPlusPi(value), true);
     }
-    
+
     internal static Heading FromDegrees(decimal value)
     {
         var valueRadians = (value / 180m * (decimal)Math.PI);
         return FromRadians(valueRadians);
     }
 
-    public static Heading GetHeadingOffset(Heading setPoint, Heading currentHeading)
-    {
-        return setPoint - currentHeading;
-    }
-    
-    public static Heading GetCorrectedHeading(Heading currentHeading, Heading offset)
-    {
-        return currentHeading + offset;
-    }
 
-    public decimal Sin()
-    {
-        return (decimal)Math.Sin((double)Radians);
-    }
-    
-    public decimal Cos()
-    {
-        return (decimal)Math.Cos((double)Radians);
-    }
-    
-    public decimal Tan()
-    {
-        return (decimal)Math.Tan((double)Radians);
-    }
-    
     public bool IsCloseTo(Heading other, Heading maxDelta)
     {
         var delta = this - other;
         return Math.Abs(delta.Radians) <= maxDelta.Radians;
     }
-    
+
     public bool IsNotCloseTo(Heading other, Heading maxDelta)
     {
         return !IsCloseTo(other, maxDelta);
     }
-    
+
     private static decimal ReduceRadians_To_MinusPiToPlusPi(decimal inputRadians)
     {
         var turns = (int)Math.Round(inputRadians / (decimal)(Math.PI*2), 0);
@@ -116,7 +92,7 @@ public readonly struct Heading
     {
         return Heading.FromRadians((decimal)Math.Atan2((double)y, (double)x));
     }
-    
+
     public static Heading From(Distance y, Distance x)
     {
         return Heading.FromRadians((decimal)Math.Atan2((double)y.Meters, (double)x.Meters));

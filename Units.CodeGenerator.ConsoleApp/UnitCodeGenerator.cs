@@ -14,13 +14,13 @@ internal class UnitCodeGenerator
         _additionalUnitsGenerator = new AdditionalUnitsGenerator(_indent);
     }
 
-    public IImmutableList<string> GenerateCode(ValueDefinition valueDefinition)
+    public IImmutableList<GeneratedUnitType> GenerateCode(ValueDefinition valueDefinition)
     {
         var className = valueDefinition.ValueName.ClassName();
         var nameSpace = valueDefinition.Namespace;
         var defaultUnit = valueDefinition.DefaultUnit;
 
-        return GenerateStartOfClass(valueDefinition, className, nameSpace)
+        var mainStructLines = GenerateStartOfClass(valueDefinition, className, nameSpace)
             .Concat(_additionalUnitsGenerator.GenerateConstants(valueDefinition.AdditionalUnits))
             .Concat(GenerateProperties(valueDefinition))
             .Concat(GenerateConstructors(valueDefinition, className))
@@ -29,9 +29,14 @@ internal class UnitCodeGenerator
             .Concat(GenerateBaseValueImplementation(className, defaultUnit, valueDefinition.Options))
             .Concat(GenerateStandardOperators(valueDefinition.DefaultUnit, className, valueDefinition.Options))
             .Concat(GenerateUnitOperations(valueDefinition, className))
-            .Concat(["}", string.Empty])
-            .Concat(GenerateStartOfExtensionClass(valueDefinition, className, nameSpace))
+            .Append("}")
             .ToImmutableList();
+
+        return
+        [
+            new GeneratedUnitType(className, mainStructLines),
+            new GeneratedUnitType($"{className}NumberExtensions", GenerateExtensionClass(valueDefinition, className, nameSpace)),
+        ];
     }
 
     private IImmutableList<string> GenerateUnitOperations(ValueDefinition valueDefinition, string className)
@@ -60,7 +65,7 @@ internal class UnitCodeGenerator
         return lines.ToIImmutableList();
     }
 
-    private IImmutableList<string> GenerateStartOfExtensionClass(ValueDefinition valueDefinition, string className, string nameSpace)
+    private IImmutableList<string> GenerateExtensionClass(ValueDefinition valueDefinition, string className, string nameSpace)
     {
         var units = valueDefinition.AdditionalUnits.Prepend(valueDefinition.DefaultUnit);
 
@@ -210,3 +215,5 @@ internal class UnitCodeGenerator
         return lines.ToIImmutableList();
     }
 }
+
+internal record GeneratedUnitType(string Name, IImmutableList<string> Lines);

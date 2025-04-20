@@ -1,4 +1,4 @@
-﻿namespace Units;
+namespace Units;
 
 public static class DistanceExtensions
 {

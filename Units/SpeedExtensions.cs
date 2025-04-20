@@ -1,57 +1,77 @@
-﻿namespace Units;
+namespace Units;
 
 public static class SpeedExtensions
 {
-    public static Speed MetersPerSecond(this float value)
-    {
-        return Speed.FromMetersPerSecond((decimal)value);
-    }    
-    
-    public static Speed MetersPerSecond(this decimal value)
-    {
-        return Speed.FromMetersPerSecond(value);
-    }    
-
-    public static Speed MetersPerSecond(this int value)
-    {
-        return Speed.FromMetersPerSecond(value);
-    }
-    
-    public static Speed KiloMetersPerHour(this float value)
-    {
-        return Speed.FromKiloMetersPerHour((decimal)value);
-    } 
-    
-    public static Speed KiloMetersPerHour(this decimal value)
-    {
-        return Speed.FromKiloMetersPerHour(value);
-    }    
-
-    public static Speed KiloMetersPerHour(this int value)
-    {
-        return Speed.FromKiloMetersPerHour(value);
-    }
-    
-    public static Speed MilliMetersPerSecond(this float value)
-    {
-        return Speed.FromMilliMetersPerSecond((decimal)value);
-    }    
-    
-    public static Speed MilliMetersPerSecond(this decimal value)
-    {
-        return Speed.FromMilliMetersPerSecond(value);
-    }    
-
-    public static Speed MilliMetersPerSecond(this int value)
-    {
-        return Speed.FromMilliMetersPerSecond(value);
-    }
-
-    public static Speed LimitWithAccelerationAndTime(this Speed value, Speed previousValue, Acceleration maxAcceleration, Time deltaTime)
-    {
-        var minSpeed = previousValue - (maxAcceleration.Abs() * deltaTime);
-        var maxSpeed = previousValue + (maxAcceleration.Abs() * deltaTime);
-
-        return value.ClampWith(firstBoundary: minSpeed, secondBoundary: maxSpeed);
-    }
+    public static Speed MetersPerSecond(this decimal value) => Speed.FromMetersPerSecond(value);
+    public static Speed MetersPerSecond(this float value) => Speed.FromMetersPerSecond((decimal)value);
+    public static Speed MetersPerSecond(this int value) => Speed.FromMetersPerSecond(value);
+    public static Speed MetersPerSecond(this uint value) => Speed.FromMetersPerSecond(value);
+    public static Speed MetersPerSecond(this long value) => Speed.FromMetersPerSecond(value);
+    public static Speed MetersPerSecond(this ulong value) => Speed.FromMetersPerSecond(value);
+    public static Speed MetersPerSecond(this short value) => Speed.FromMetersPerSecond(value);
+    public static Speed MetersPerSecond(this ushort value) => Speed.FromMetersPerSecond(value);
+    public static Speed MillimetersPerSecond(this decimal value) => Speed.FromMillimetersPerSecond(value);
+    public static Speed MillimetersPerSecond(this float value) => Speed.FromMillimetersPerSecond((decimal)value);
+    public static Speed MillimetersPerSecond(this int value) => Speed.FromMillimetersPerSecond(value);
+    public static Speed MillimetersPerSecond(this uint value) => Speed.FromMillimetersPerSecond(value);
+    public static Speed MillimetersPerSecond(this long value) => Speed.FromMillimetersPerSecond(value);
+    public static Speed MillimetersPerSecond(this ulong value) => Speed.FromMillimetersPerSecond(value);
+    public static Speed MillimetersPerSecond(this short value) => Speed.FromMillimetersPerSecond(value);
+    public static Speed MillimetersPerSecond(this ushort value) => Speed.FromMillimetersPerSecond(value);
+    public static Speed CentimetersPerSecond(this decimal value) => Speed.FromCentimetersPerSecond(value);
+    public static Speed CentimetersPerSecond(this float value) => Speed.FromCentimetersPerSecond((decimal)value);
+    public static Speed CentimetersPerSecond(this int value) => Speed.FromCentimetersPerSecond(value);
+    public static Speed CentimetersPerSecond(this uint value) => Speed.FromCentimetersPerSecond(value);
+    public static Speed CentimetersPerSecond(this long value) => Speed.FromCentimetersPerSecond(value);
+    public static Speed CentimetersPerSecond(this ulong value) => Speed.FromCentimetersPerSecond(value);
+    public static Speed CentimetersPerSecond(this short value) => Speed.FromCentimetersPerSecond(value);
+    public static Speed CentimetersPerSecond(this ushort value) => Speed.FromCentimetersPerSecond(value);
+    public static Speed DecimetersPerSecond(this decimal value) => Speed.FromDecimetersPerSecond(value);
+    public static Speed DecimetersPerSecond(this float value) => Speed.FromDecimetersPerSecond((decimal)value);
+    public static Speed DecimetersPerSecond(this int value) => Speed.FromDecimetersPerSecond(value);
+    public static Speed DecimetersPerSecond(this uint value) => Speed.FromDecimetersPerSecond(value);
+    public static Speed DecimetersPerSecond(this long value) => Speed.FromDecimetersPerSecond(value);
+    public static Speed DecimetersPerSecond(this ulong value) => Speed.FromDecimetersPerSecond(value);
+    public static Speed DecimetersPerSecond(this short value) => Speed.FromDecimetersPerSecond(value);
+    public static Speed DecimetersPerSecond(this ushort value) => Speed.FromDecimetersPerSecond(value);
+    public static Speed KilometersPerSecond(this decimal value) => Speed.FromKilometersPerSecond(value);
+    public static Speed KilometersPerSecond(this float value) => Speed.FromKilometersPerSecond((decimal)value);
+    public static Speed KilometersPerSecond(this int value) => Speed.FromKilometersPerSecond(value);
+    public static Speed KilometersPerSecond(this uint value) => Speed.FromKilometersPerSecond(value);
+    public static Speed KilometersPerSecond(this long value) => Speed.FromKilometersPerSecond(value);
+    public static Speed KilometersPerSecond(this ulong value) => Speed.FromKilometersPerSecond(value);
+    public static Speed KilometersPerSecond(this short value) => Speed.FromKilometersPerSecond(value);
+    public static Speed KilometersPerSecond(this ushort value) => Speed.FromKilometersPerSecond(value);
+    public static Speed FeetPerSecond(this decimal value) => Speed.FromFeetPerSecond(value);
+    public static Speed FeetPerSecond(this float value) => Speed.FromFeetPerSecond((decimal)value);
+    public static Speed FeetPerSecond(this int value) => Speed.FromFeetPerSecond(value);
+    public static Speed FeetPerSecond(this uint value) => Speed.FromFeetPerSecond(value);
+    public static Speed FeetPerSecond(this long value) => Speed.FromFeetPerSecond(value);
+    public static Speed FeetPerSecond(this ulong value) => Speed.FromFeetPerSecond(value);
+    public static Speed FeetPerSecond(this short value) => Speed.FromFeetPerSecond(value);
+    public static Speed FeetPerSecond(this ushort value) => Speed.FromFeetPerSecond(value);
+    public static Speed InchesPerSecond(this decimal value) => Speed.FromInchesPerSecond(value);
+    public static Speed InchesPerSecond(this float value) => Speed.FromInchesPerSecond((decimal)value);
+    public static Speed InchesPerSecond(this int value) => Speed.FromInchesPerSecond(value);
+    public static Speed InchesPerSecond(this uint value) => Speed.FromInchesPerSecond(value);
+    public static Speed InchesPerSecond(this long value) => Speed.FromInchesPerSecond(value);
+    public static Speed InchesPerSecond(this ulong value) => Speed.FromInchesPerSecond(value);
+    public static Speed InchesPerSecond(this short value) => Speed.FromInchesPerSecond(value);
+    public static Speed InchesPerSecond(this ushort value) => Speed.FromInchesPerSecond(value);
+    public static Speed MilesPerHour(this decimal value) => Speed.FromMilesPerHour(value);
+    public static Speed MilesPerHour(this float value) => Speed.FromMilesPerHour((decimal)value);
+    public static Speed MilesPerHour(this int value) => Speed.FromMilesPerHour(value);
+    public static Speed MilesPerHour(this uint value) => Speed.FromMilesPerHour(value);
+    public static Speed MilesPerHour(this long value) => Speed.FromMilesPerHour(value);
+    public static Speed MilesPerHour(this ulong value) => Speed.FromMilesPerHour(value);
+    public static Speed MilesPerHour(this short value) => Speed.FromMilesPerHour(value);
+    public static Speed MilesPerHour(this ushort value) => Speed.FromMilesPerHour(value);
+    public static Speed KilometersPerHour(this decimal value) => Speed.FromKilometersPerHour(value);
+    public static Speed KilometersPerHour(this float value) => Speed.FromKilometersPerHour((decimal)value);
+    public static Speed KilometersPerHour(this int value) => Speed.FromKilometersPerHour(value);
+    public static Speed KilometersPerHour(this uint value) => Speed.FromKilometersPerHour(value);
+    public static Speed KilometersPerHour(this long value) => Speed.FromKilometersPerHour(value);
+    public static Speed KilometersPerHour(this ulong value) => Speed.FromKilometersPerHour(value);
+    public static Speed KilometersPerHour(this short value) => Speed.FromKilometersPerHour(value);
+    public static Speed KilometersPerHour(this ushort value) => Speed.FromKilometersPerHour(value);
 }
