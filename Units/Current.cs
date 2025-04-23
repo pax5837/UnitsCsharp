@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Units;
 
-public readonly struct Current : IBaseValue<Current>
+public readonly partial struct Current : IBaseValue<Current>
 {
     public static readonly Current Zero = FromAmperes(0m);
 
@@ -33,7 +33,6 @@ public readonly struct Current : IBaseValue<Current>
         Amperes = amperes;
     }
 
-    [JsonConstructor]
     private Current(decimal amperes, bool _)
     {
         Amperes = amperes;

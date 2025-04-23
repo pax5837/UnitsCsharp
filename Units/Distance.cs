@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Units;
 
-public readonly struct Distance : IBaseValue<Distance>
+public readonly partial struct Distance : IBaseValue<Distance>
 {
     public static readonly Distance Zero = FromMeters(0m);
 
@@ -12,6 +12,7 @@ public readonly struct Distance : IBaseValue<Distance>
     private const decimal KilometersFactor = 1000m;
     private const decimal FeetFactor = 0.3047999902464003121151900123m;
     private const decimal InchesFactor = 0.0253999604776614967587110434m;
+    private const decimal InchesOffset = 0.0000000000000000000000000018m;
     private const decimal MilesFactor = 1609.34m;
 
     [JsonInclude]
@@ -33,7 +34,7 @@ public readonly struct Distance : IBaseValue<Distance>
     public decimal Feet => Meters / FeetFactor;
 
     [JsonIgnore]
-    public decimal Inches => Meters / InchesFactor;
+    public decimal Inches => (Meters - InchesOffset) / InchesFactor;
 
     [JsonIgnore]
     public decimal Miles => Meters / MilesFactor;
@@ -45,7 +46,6 @@ public readonly struct Distance : IBaseValue<Distance>
         Meters = meters;
     }
 
-    [JsonConstructor]
     private Distance(decimal meters, bool _)
     {
         Meters = meters;
@@ -57,7 +57,7 @@ public readonly struct Distance : IBaseValue<Distance>
     public static Distance FromDecimeters(decimal value) => new Distance(value * DecimetersFactor, false);
     public static Distance FromKilometers(decimal value) => new Distance(value * KilometersFactor, false);
     public static Distance FromFeet(decimal value) => new Distance(value * FeetFactor, false);
-    public static Distance FromInches(decimal value) => new Distance(value * InchesFactor, false);
+    public static Distance FromInches(decimal value) => new Distance((value * InchesFactor) + InchesOffset, false);
     public static Distance FromMiles(decimal value) => new Distance(value * MilesFactor, false);
 
     public override string ToString() => $"{Meters:F3} [m]";

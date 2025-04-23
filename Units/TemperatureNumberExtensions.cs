@@ -1,6 +1,6 @@
 namespace Units;
 
-public static class TemperatureNumberExtensions
+public static class TemperatureExtensions
 {
     public static Temperature DegreesC(this decimal value) => Temperature.FromDegreesC(value);
     public static Temperature DegreesC(this float value) => Temperature.FromDegreesC((decimal)value);

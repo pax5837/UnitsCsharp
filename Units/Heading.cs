@@ -2,12 +2,7 @@
 
 namespace Units;
 
-/// <summary>
-/// Represents a heading with the value being limited to -PI to +PI, or -180° to +180°.
-/// The heading 0° is along the x axis.
-/// Turns counter clockwise.
-/// </summary>
-public readonly struct Heading
+public readonly partial struct Heading
 {
     public static readonly Heading Zero = Heading.FromRadians(0);
 
@@ -37,25 +32,6 @@ public readonly struct Heading
         return $"{degreesString} [°]";
     }
 
-    public Heading AverageWith(Heading other)
-    {
-        if (Math.Sign(Radians) == 0 || Math.Sign(other.Radians) == 0 || Math.Sign(Radians) == Math.Sign(other.Radians))
-        {
-            return FromRadians((Radians + other.Radians) / 2m);
-        }
-
-        var differenceHeading = Radians - other.Radians;
-
-        return ((double)Math.Abs(differenceHeading)) < Math.PI
-            ? FromRadians(other.Radians + (differenceHeading / 2))
-            : FromRadians((decimal)((decimal)Math.PI + other.Radians + differenceHeading / 2));
-    }
-
-    public static Heading Average(Heading a, Heading b)
-    {
-        return a.AverageWith(b);
-    }
-
     internal static Heading FromRadians(decimal value)
     {
         return new Heading(ReduceRadians_To_MinusPiToPlusPi(value), true);
@@ -66,7 +42,6 @@ public readonly struct Heading
         var valueRadians = (value / 180m * (decimal)Math.PI);
         return FromRadians(valueRadians);
     }
-
 
     public bool IsCloseTo(Heading other, Heading maxDelta)
     {
@@ -79,14 +54,6 @@ public readonly struct Heading
         return !IsCloseTo(other, maxDelta);
     }
 
-    private static decimal ReduceRadians_To_MinusPiToPlusPi(decimal inputRadians)
-    {
-        var turns = (int)Math.Round(inputRadians / (decimal)(Math.PI*2), 0);
-        var reducedInput = inputRadians - (decimal)(turns * (Math.PI * 2));
-        return reducedInput > (decimal)Math.PI
-            ? reducedInput - (decimal)(Math.PI * 2)
-            : reducedInput;
-    }
 
     public static Heading From(decimal y, decimal x)
     {

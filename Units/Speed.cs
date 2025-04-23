@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Units;
 
-public readonly struct Speed : IBaseValue<Speed>
+public readonly partial struct Speed : IBaseValue<Speed>
 {
     public static readonly Speed Zero = FromMetersPerSecond(0m);
 
@@ -12,6 +12,7 @@ public readonly struct Speed : IBaseValue<Speed>
     private const decimal KilometersPerSecondFactor = 1000m;
     private const decimal FeetPerSecondFactor = 0.3047999902464003121151900123m;
     private const decimal InchesPerSecondFactor = 0.0253999604776614967587110434m;
+    private const decimal InchesPerSecondOffset = 0.0000000000000000000000000018m;
     private const decimal MilesPerHourFactor = 0.44704m;
     private const decimal KilometersPerHourFactor = 3.6m;
 
@@ -34,7 +35,7 @@ public readonly struct Speed : IBaseValue<Speed>
     public decimal FeetPerSecond => MetersPerSecond / FeetPerSecondFactor;
 
     [JsonIgnore]
-    public decimal InchesPerSecond => MetersPerSecond / InchesPerSecondFactor;
+    public decimal InchesPerSecond => (MetersPerSecond - InchesPerSecondOffset) / InchesPerSecondFactor;
 
     [JsonIgnore]
     public decimal MilesPerHour => MetersPerSecond / MilesPerHourFactor;
@@ -49,7 +50,6 @@ public readonly struct Speed : IBaseValue<Speed>
         MetersPerSecond = metersPerSecond;
     }
 
-    [JsonConstructor]
     private Speed(decimal metersPerSecond, bool _)
     {
         MetersPerSecond = metersPerSecond;
@@ -61,7 +61,7 @@ public readonly struct Speed : IBaseValue<Speed>
     public static Speed FromDecimetersPerSecond(decimal value) => new Speed(value * DecimetersPerSecondFactor, false);
     public static Speed FromKilometersPerSecond(decimal value) => new Speed(value * KilometersPerSecondFactor, false);
     public static Speed FromFeetPerSecond(decimal value) => new Speed(value * FeetPerSecondFactor, false);
-    public static Speed FromInchesPerSecond(decimal value) => new Speed(value * InchesPerSecondFactor, false);
+    public static Speed FromInchesPerSecond(decimal value) => new Speed((value * InchesPerSecondFactor) + InchesPerSecondOffset, false);
     public static Speed FromMilesPerHour(decimal value) => new Speed(value * MilesPerHourFactor, false);
     public static Speed FromKilometersPerHour(decimal value) => new Speed(value * KilometersPerHourFactor, false);
 

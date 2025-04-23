@@ -2,11 +2,11 @@ using System.Text.Json.Serialization;
 
 namespace Units;
 
-public readonly struct Temperature
+public readonly partial struct Temperature
 {
     private const decimal KelvinOffset = -273.15m;
     private const decimal DegFahrenheitFactor = 0.5555555555555555555555555556m;
-    private const decimal DegFahrenheitOffset = -17.777777777777777777777777779m;
+    private const decimal DegFahrenheitOffset = -17.777777777777777777777777780m;
 
     [JsonInclude]
     public decimal DegreesC { get; }
@@ -24,15 +24,14 @@ public readonly struct Temperature
         DegreesC = degreesC;
     }
 
-    [JsonConstructor]
     private Temperature(decimal degreesC, bool _)
     {
         DegreesC = degreesC;
     }
 
     public static Temperature FromDegreesC(decimal value) => new Temperature(value, false);
-    public static Temperature FromKelvin(decimal value) => new Temperature(value - KelvinOffset, false);
-    public static Temperature FromDegFahrenheit(decimal value) => new Temperature((value * DegFahrenheitFactor) - DegFahrenheitOffset, false);
+    public static Temperature FromKelvin(decimal value) => new Temperature(value + KelvinOffset, false);
+    public static Temperature FromDegFahrenheit(decimal value) => new Temperature((value * DegFahrenheitFactor) + DegFahrenheitOffset, false);
 
     public override string ToString() => $"{DegreesC:F3} [°C]";
 

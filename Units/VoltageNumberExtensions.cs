@@ -1,6 +1,6 @@
 namespace Units;
 
-public static class VoltageNumberExtensions
+public static class VoltageExtensions
 {
     public static Voltage Volts(this decimal value) => Voltage.FromVolts(value);
     public static Voltage Volts(this float value) => Voltage.FromVolts((decimal)value);

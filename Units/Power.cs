@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Units;
 
-public readonly struct Power : IBaseValue<Power>
+public readonly partial struct Power : IBaseValue<Power>
 {
     public static readonly Power Zero = FromWatts(0m);
 
@@ -37,7 +37,6 @@ public readonly struct Power : IBaseValue<Power>
         Watts = watts;
     }
 
-    [JsonConstructor]
     private Power(decimal watts, bool _)
     {
         Watts = watts;

@@ -11,7 +11,7 @@ public record UnitDefinition(
 
     public string ParameterName() => UnitName.ParameterName();
 
-    public FactorOffset FactorOffset()
+    public FactorAndOffset CalculateFactorAndOffset()
     {
         if (Equalities.Count == 0 || Equalities.Count > 2)
         {
@@ -28,11 +28,13 @@ public record UnitDefinition(
         var highValue = sortedEqualities[1];
         var lowValue = sortedEqualities[0];
 
-        var factor = (highValue.ValueDefaultUnit - lowValue.ValueDefaultUnit) / (highValue.ValueUnit - lowValue.ValueUnit);
-        var offset = (- lowValue.ValueUnit) * factor + lowValue.ValueDefaultUnit;
+        var deltaDefaultUnit = highValue.ValueDefaultUnit - lowValue.ValueDefaultUnit;
+        var deltaUnit = highValue.ValueUnit - lowValue.ValueUnit;
+        var factor = deltaDefaultUnit / deltaUnit;
+        var offset = highValue.ValueDefaultUnit - (highValue.ValueUnit * factor);
 
-        return new FactorOffset(factor, offset);
+        return new FactorAndOffset(factor, offset);
     }
 }
 
-public record FactorOffset(decimal Factor, decimal Offset);
+public record FactorAndOffset(decimal Factor, decimal Offset);

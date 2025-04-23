@@ -1,6 +1,6 @@
 namespace Units;
 
-public static class PowerNumberExtensions
+public static class PowerExtensions
 {
     public static Power Watts(this decimal value) => Power.FromWatts(value);
     public static Power Watts(this float value) => Power.FromWatts((decimal)value);

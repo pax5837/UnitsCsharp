@@ -59,14 +59,14 @@ internal class AdditionalUnitsGenerator
 
     private void GenerateStaticInstantiator(Lines lines, UnitDefinition unit, string className)
     {
-        var (factor, offset) = unit.FactorOffset();
+        var (factor, offset) = unit.CalculateFactorAndOffset();
 
         var conversion = factor != 1m
             ? offset != 0
-                ? $"(value * {FactorConstant(unit)}) - {OffsetConstant(unit)}"
+                ? $"(value * {FactorConstant(unit)}) + {OffsetConstant(unit)}"
                 : $"value * {FactorConstant(unit)}"
             : offset != 0
-                ? $"value - {OffsetConstant(unit)}"
+                ? $"value + {OffsetConstant(unit)}"
                 : "value";
 
         lines
@@ -76,21 +76,19 @@ internal class AdditionalUnitsGenerator
 
     private void GenerateProperties(Lines lines, UnitDefinition unit, string defaultUnitPropertyName)
     {
-        var (factor, offset) = unit.FactorOffset();
+        var (factor, offset) = unit.CalculateFactorAndOffset();
 
-        var openParenthesis = factor == 1 ? string.Empty : "(";
-        var closeParenthesis = factor == 1 ? string.Empty : ")";
-        var numerator = offset switch
-        {
-            <0m => $"{openParenthesis}{defaultUnitPropertyName} - {OffsetConstant(unit)}{closeParenthesis}",
-            >0m => $"{openParenthesis}{defaultUnitPropertyName} - {OffsetConstant(unit)}{closeParenthesis}",
-            _ => $"{defaultUnitPropertyName}"
-        };
+        var conversion = factor == 1
+            ? offset == 0
+                ? $"{defaultUnitPropertyName}"
+                : $"{defaultUnitPropertyName} - {OffsetConstant(unit)}"
+            : offset == 0
+                ? $"{defaultUnitPropertyName} / {FactorConstant(unit)}"
+                : $"({defaultUnitPropertyName} - {OffsetConstant(unit)}) / {FactorConstant(unit)}";
 
-        var denominator = factor == 1 ? string.Empty : $" / {FactorConstant(unit)}";
         lines
             .Add(1, "[JsonIgnore]")
-            .Add(1, $"public decimal {unit.PropertyName()} => {numerator}{denominator};")
+            .Add(1, $"public decimal {unit.PropertyName()} => {conversion};")
             .AddEmptyLine();
     }
 
@@ -98,7 +96,7 @@ internal class AdditionalUnitsGenerator
         UnitDefinition unit,
         Lines lines)
     {
-        var (factor, offset) = unit.FactorOffset();
+        var (factor, offset) = unit.CalculateFactorAndOffset();
 
         if (factor != 1m)
         {

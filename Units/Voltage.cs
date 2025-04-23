@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Units;
 
-public readonly struct Voltage : IBaseValue<Voltage>
+public readonly partial struct Voltage : IBaseValue<Voltage>
 {
     public static readonly Voltage Zero = FromVolts(0m);
 
@@ -33,7 +33,6 @@ public readonly struct Voltage : IBaseValue<Voltage>
         Volts = volts;
     }
 
-    [JsonConstructor]
     private Voltage(decimal volts, bool _)
     {
         Volts = volts;
