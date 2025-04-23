@@ -7,11 +7,11 @@ public record UnitDefinition(
     string UnitShortSymbol,
     IImmutableList<UnitEquality> Equalities)
 {
-    public string PropertyName() => UnitName.PropertyName();
+    internal string PropertyName() => UnitName.PropertyName();
 
-    public string ParameterName() => UnitName.ParameterName();
+    internal string ParameterName() => UnitName.ParameterName();
 
-    public FactorAndOffset CalculateFactorAndOffset()
+    internal FactorAndOffset CalculateFactorAndOffset()
     {
         if (Equalities.Count == 0 || Equalities.Count > 2)
         {
@@ -34,24 +34,5 @@ public record UnitDefinition(
         var offset = highValue.ValueDefaultUnit - (highValue.ValueUnit * factor);
 
         return new FactorAndOffset(factor, offset);
-    }
-}
-
-public record FactorAndOffset(decimal Factor, decimal Offset)
-{
-    public string Match(
-        Func<string> whenFactorAndOffsetAreRelevant,
-        Func<string> whenOnlyFactorIsRelevant,
-        Func<string> whenOnlyOffsetIsRelevant,
-        Func<string> whenNeitherFactorNorOffsetAreRelevant)
-    {
-        return Factor == 1
-            ? Offset == 0
-                ? whenNeitherFactorNorOffsetAreRelevant()
-                : whenOnlyOffsetIsRelevant()
-            : Offset == 0
-                ? whenOnlyFactorIsRelevant()
-                : whenFactorAndOffsetAreRelevant();
-
     }
 }
