@@ -59,15 +59,12 @@ internal class AdditionalUnitsGenerator
 
     private void GenerateStaticInstantiator(Lines lines, UnitDefinition unit, string className)
     {
-        var (factor, offset) = unit.CalculateFactorAndOffset();
-
-        var conversion = factor != 1m
-            ? offset != 0
-                ? $"(value * {FactorConstant(unit)}) + {OffsetConstant(unit)}"
-                : $"value * {FactorConstant(unit)}"
-            : offset != 0
-                ? $"value + {OffsetConstant(unit)}"
-                : "value";
+        var conversion = unit.CalculateFactorAndOffset()
+            .Match(
+                whenFactorAndOffsetAreRelevant: () => $"(value * {FactorConstant(unit)}) + {OffsetConstant(unit)}",
+                whenNeitherFactorNorOffsetAreRelevant: () => "value",
+                whenOnlyFactorIsRelevant: () => $"value * {FactorConstant(unit)}",
+                whenOnlyOffsetIsRelevant: () => $"value + {OffsetConstant(unit)}");
 
         lines
             .Add(1,
@@ -76,15 +73,12 @@ internal class AdditionalUnitsGenerator
 
     private void GenerateProperties(Lines lines, UnitDefinition unit, string defaultUnitPropertyName)
     {
-        var (factor, offset) = unit.CalculateFactorAndOffset();
-
-        var conversion = factor == 1
-            ? offset == 0
-                ? $"{defaultUnitPropertyName}"
-                : $"{defaultUnitPropertyName} - {OffsetConstant(unit)}"
-            : offset == 0
-                ? $"{defaultUnitPropertyName} / {FactorConstant(unit)}"
-                : $"({defaultUnitPropertyName} - {OffsetConstant(unit)}) / {FactorConstant(unit)}";
+        var conversion = unit.CalculateFactorAndOffset()
+            .Match(
+                whenFactorAndOffsetAreRelevant: () => $"({defaultUnitPropertyName} - {OffsetConstant(unit)}) / {FactorConstant(unit)}",
+                whenNeitherFactorNorOffsetAreRelevant: () => $"{defaultUnitPropertyName}",
+                whenOnlyFactorIsRelevant: () => $"{defaultUnitPropertyName} / {FactorConstant(unit)}",
+                whenOnlyOffsetIsRelevant: () => $"{defaultUnitPropertyName} - {OffsetConstant(unit)}");
 
         lines
             .Add(1, "[JsonIgnore]")
